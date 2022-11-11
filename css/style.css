@@ -5,10 +5,14 @@ h1{
     margin: auto;
     padding:5px;
 }
+h3{
+    color: red;
+}
 input{
     margin-bottom: 2em;
 }
 .entry-data{
+    padding: .5em;
     height:300px;
     width:400px;
     border: 3px solid black;
@@ -18,6 +22,7 @@ input{
     width:100%;
     background-color: red;
     margin-left: 1em;
+    cursor: pointer;
 }
 .completed{
     opacity: 50%;
