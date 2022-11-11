@@ -1,5 +1,5 @@
 body{
-    width:800px;
+    width:900px;
 }
 h1{
     margin: auto;
@@ -10,24 +10,36 @@ input{
 }
 .entry-data{
     height:300px;
-    width:300px;
+    width:400px;
     border: 3px solid black;
     float: left;
 }
+.todo{
+    width:100%;
+    background-color: red;
+    margin-left: 1em;
+}
+.completed{
+    opacity: 50%;
+    background-color: aquamarine;
+}
 #incomplete-items{
+    overflow: hidden;
     height:auto;
     width:400px;
     border: 3px solid black;
     float: left;
 }
-.row:after {
+.to-do-columns:after {
     content: "";
     display: table;
     clear: both;
   }
-.complete-items{
+#complete-items{
+    overflow: hidden;
     height:auto;
     width:400px;
     border: 3px solid black;
     float: left;
 }
+

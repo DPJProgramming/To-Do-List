@@ -28,16 +28,14 @@ function getToDoItem() {
     return item;
 }
 function displayToDoItems(item) {
-    var itemTask = document.createElement("h3");
-    itemTask.innerText = item.task;
-    var date = document.createElement("h3");
-    date.innerText = item.dueDate.toDateString();
+    var toDoItem = document.createElement("h3");
+    toDoItem.innerText = item.task + " " + item.dueDate.toDateString();
     var itemDiv = document.createElement("div");
+    itemDiv.classList.add("todo");
     if (item.isComplete) {
         itemDiv.classList.add("completed");
     }
-    itemDiv.appendChild(itemTask);
-    itemDiv.appendChild(date);
+    itemDiv.appendChild(toDoItem);
     if (item.isComplete) {
         (fromId("complete-items")).appendChild(itemDiv);
     }

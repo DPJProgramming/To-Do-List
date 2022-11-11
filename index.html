@@ -10,20 +10,20 @@
     
 </head>
 <body>
-    <div class="row">
+    <div class="to-do-columns">
         <div class="entry-data">
             <h1>Add Entry</h1>
 
             <label for="task">Enter Task</label>
-            <input type="text" id="task">
+            <input type="text" name="task" id="task">
             <br>
 
             <label for="due-date">Do Before</label>
-            <input type="text" id="due-date">
+            <input type="text" name="due-date" id="due-date">
             <br>
 
-            <input type="checkbox" id="complete">
-            <label> Complete</label>
+            <input type="checkbox" name="complete" id="complete">
+            <label for="complete"> Complete</label>
             <br>
 
             <button type="button" id="add-item">Add To List</button>
@@ -34,9 +34,9 @@
             <h1>To Do List</h1>
         </div>
     </div>
-
-    <p>dssRgrgergreg</p>
-    <div id="complete-Items"></div>
+    <div id="complete-items">
+        <h1>Completed Items</h1>
+    </div>
 
     <script src="https://unpkg.com/js-datepicker"></script>
     <script src="/js/main.js"></script>

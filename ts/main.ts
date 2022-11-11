@@ -25,7 +25,7 @@ function main():void{
 }
 
 /**
- * check if data sent to function is valid
+ * check if data is valid
  */
 function isValid():boolean{
     //task validation
@@ -55,22 +55,18 @@ function getToDoItem():ToDoItem{
  */
 function displayToDoItems(item:ToDoItem):void{
 
-    //display task as item text
-    let itemTask = document.createElement("h3");
-    itemTask.innerText = item.task;
-    
-    //display date due by as item text
-    let date = document.createElement("h3");
-    date.innerText = item.dueDate.toDateString();
+    //make an h3 and set text to task and due date 
+    let toDoItem:HTMLElement = document.createElement("h3");
+    toDoItem.innerText = item.task + " " + item.dueDate.toDateString();
 
-    //div class="completed"
+    //div class="completed" and "todo"
     let itemDiv = document.createElement("div");
+    itemDiv.classList.add("todo");
     if(item.isComplete){
         itemDiv.classList.add("completed");
     }
 
-    itemDiv.appendChild(itemTask);
-    itemDiv.appendChild(date);
+    itemDiv.appendChild(toDoItem);
 
     if(item.isComplete){
         (fromId("complete-items")).appendChild(itemDiv);
