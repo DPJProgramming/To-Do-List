@@ -1,0 +1,33 @@
+body{
+    width:800px;
+}
+h1{
+    margin: auto;
+    padding:5px;
+}
+input{
+    margin-bottom: 2em;
+}
+.entry-data{
+    height:300px;
+    width:300px;
+    border: 3px solid black;
+    float: left;
+}
+#incomplete-items{
+    height:auto;
+    width:400px;
+    border: 3px solid black;
+    float: left;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+.complete-items{
+    height:auto;
+    width:400px;
+    border: 3px solid black;
+    float: left;
+}

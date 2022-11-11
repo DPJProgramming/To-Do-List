@@ -14,7 +14,7 @@ function fromId(id:string):HTMLInputElement{
 }
 
 window.onload = function():void{
-    let addItem:HTMLElement = fromId("add-item");
+    let addItem:HTMLElement = <HTMLElement>fromId("add-item");
     addItem.onclick = main; 
 }
 
@@ -29,7 +29,7 @@ function main():void{
  */
 function isValid():boolean{
     //task validation
-    if(){}
+   
 
     //date validation
     return true;
@@ -41,7 +41,9 @@ function isValid():boolean{
 function getToDoItem():ToDoItem{
     //create new object with info from user
     let item = new ToDoItem();
-    item.task = ((fromId("task"))).value;
+
+    //set object variables to user input
+    item.task = (fromId("task")).value;
     item.dueDate = new Date((fromId("due-date")).value);
     item.isComplete = fromId("complete").checked;
 
@@ -53,5 +55,29 @@ function getToDoItem():ToDoItem{
  */
 function displayToDoItems(item:ToDoItem):void{
 
+    //display task as item text
+    let itemTask = document.createElement("h3");
+    itemTask.innerText = item.task;
+    
+    //display date due by as item text
+    let date = document.createElement("h3");
+    date.innerText = item.dueDate.toDateString();
+
+    //div class="completed"
+    let itemDiv = document.createElement("div");
+    if(item.isComplete){
+        itemDiv.classList.add("completed");
+    }
+
+    itemDiv.appendChild(itemTask);
+    itemDiv.appendChild(date);
+
+    if(item.isComplete){
+        (fromId("complete-items")).appendChild(itemDiv);
+    }
+    else{
+        (fromId("incomplete-items")).appendChild(itemDiv);
+    }
+    
 }
 
