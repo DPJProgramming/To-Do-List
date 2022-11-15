@@ -11,15 +11,20 @@ function fromId(id) {
 window.onload = function () {
     var addItem = fromId("add-item");
     addItem.onclick = main;
-    loadSavedItem();
+    loadSavedItems();
 };
-function loadSavedItem() {
-    var item = loadToDoItem();
-    displayToDoItems(item);
+function loadSavedItems() {
+    var itemArray = loadToDoItems();
+    for (var i = 0; i < itemArray.length; i++) {
+        displayToDoItems(itemArray[i]);
+    }
 }
 function main() {
     var entry = getToDoItem();
     if (isValid(entry)) {
+        (fromId("task")).value = "";
+        (fromId("due-date")).value = "";
+        (fromId("complete")).checked = false;
         displayToDoItems(entry);
         saveToDoItem(entry);
     }
@@ -82,14 +87,27 @@ function displayToDoItems(item) {
     }
 }
 function markComplete() {
-    var itemDiv = this;
-    this.classList.add("completed");
-    var completedItems = fromId("complete-items");
-    completedItems.appendChild(itemDiv);
+    if (this.classList.contains("completed")) {
+        this.classList.add("todo");
+        this.classList.remove("completed");
+        fromId("incomplete-items").appendChild(this);
+    }
+    else {
+        this.classList.add("completed");
+        this.classList.remove("todo");
+        fromId("complete-items").appendChild(this);
+    }
 }
 function saveToDoItem(item) {
-    localStorage.setItem("todo entry", JSON.stringify(item));
+    var currItems = loadToDoItems();
+    if (currItems == null) {
+        currItems = new Array();
+    }
+    currItems.push(item);
+    var currItemString = JSON.stringify(currItems);
+    localStorage.setItem("todo entry", currItemString);
 }
-function loadToDoItem() {
-    return JSON.parse(localStorage.getItem("todo entry"));
+function loadToDoItems() {
+    var items = JSON.parse(localStorage.getItem("todo entry"));
+    return items;
 }

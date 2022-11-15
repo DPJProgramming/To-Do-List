@@ -16,18 +16,26 @@ function fromId(id:string):HTMLInputElement{
 window.onload = function():void{
     let addItem:HTMLElement = <HTMLElement>fromId("add-item");
     addItem.onclick = main; 
-    loadSavedItem();
+    loadSavedItems();
 }
 
-function loadSavedItem(){
-    let item = loadToDoItem();
-    displayToDoItems(item);
+function loadSavedItems(){
+    let itemArray = loadToDoItems();
+
+    for(let i = 0; i < itemArray.length; i++){//run through array to load each item stored in array
+        displayToDoItems(itemArray[i]);
+    }
 }
 
 function main():void{
     let entry:ToDoItem = getToDoItem();
 
     if(isValid(entry)){
+        //reset the form
+        (fromId("task")).value = "";
+        (fromId("due-date")).value = "";
+        (fromId("complete")).checked = false;
+
         displayToDoItems(entry);
         saveToDoItem(entry);
     }
@@ -102,7 +110,6 @@ function displayToDoItems(item:ToDoItem):void{
     let toDoEntry:HTMLElement = document.createElement("p");
     toDoEntry.innerText = item.task + " " + itemDate.toDateString();
 
-
     //div class="completed" and "todo" and click
     let itemDiv = document.createElement("div");
     itemDiv.onclick = markComplete;
@@ -124,19 +131,32 @@ function displayToDoItems(item:ToDoItem):void{
 }
 
 function markComplete(){
-    let itemDiv = <HTMLElement>this;
     
-    this.classList.add("completed");
-
-    let completedItems = fromId("complete-items");
-    completedItems.appendChild(itemDiv);
+    if(this.classList.contains("completed")){
+        this.classList.add("todo");
+        this.classList.remove("completed");
+        fromId("incomplete-items").appendChild(this);
+    }
+    else{
+        this.classList.add("completed");
+        this.classList.remove("todo");
+        fromId("complete-items").appendChild(this);
+    }
 }
 
 function saveToDoItem(item:ToDoItem):void{
-    localStorage.setItem("todo entry", JSON.stringify(item))
+    let currItems = loadToDoItems();//retrieve list from storage
+    if(currItems == null){
+        currItems = new Array();
+    }
+    currItems.push(item);//add item to array
+
+    let currItemString = JSON.stringify(currItems);
+    localStorage.setItem("todo entry", currItemString);
 }
 
-function loadToDoItem():ToDoItem{
-    return JSON.parse(localStorage.getItem("todo entry"));
+function loadToDoItems():ToDoItem[]{
+    let items:ToDoItem[] = JSON.parse(localStorage.getItem("todo entry"));
+    return items;
 }
 

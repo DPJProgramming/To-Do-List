@@ -16,10 +16,11 @@ input{
     height:300px;
     width:400px;
     border: 3px solid black;
-    float: left;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 1em;
 }
 .todo{
-    width:100%;
     background-color: red;
     margin-left: 1em;
     cursor: pointer;
@@ -27,7 +28,7 @@ input{
 .completed{
     opacity: 50%;
     background-color: aquamarine;
-    display: flex;
+    cursor: pointer;
 }
 #incomplete-items{
     overflow: hidden;
@@ -35,12 +36,8 @@ input{
     width:400px;
     border: 3px solid black;
     float: left;
+    margin-right: .5em;
 }
-.to-do-columns:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
 #complete-items{
     overflow: hidden;
     height:auto;
@@ -48,4 +45,6 @@ input{
     border: 3px solid black;
     float: left;
 }
+
+
 
