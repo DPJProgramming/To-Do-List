@@ -27,6 +27,7 @@ input{
 .completed{
     opacity: 50%;
     background-color: aquamarine;
+    display: flex;
 }
 #incomplete-items{
     overflow: hidden;

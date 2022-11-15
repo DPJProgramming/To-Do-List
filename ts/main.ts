@@ -16,6 +16,12 @@ function fromId(id:string):HTMLInputElement{
 window.onload = function():void{
     let addItem:HTMLElement = <HTMLElement>fromId("add-item");
     addItem.onclick = main; 
+    loadSavedItem();
+}
+
+function loadSavedItem(){
+    let item = loadToDoItem();
+    displayToDoItems(item);
 }
 
 function main():void{
@@ -23,6 +29,7 @@ function main():void{
 
     if(isValid(entry)){
         displayToDoItems(entry);
+        saveToDoItem(entry);
     }
 }
 
@@ -90,13 +97,15 @@ function getToDoItem():ToDoItem{
  */
 function displayToDoItems(item:ToDoItem):void{
 
-    //make an h3 and set text to task and due date 
+    //make a p and set text to task and due date 
+    let itemDate = new Date(item.dueDate.toString());
     let toDoEntry:HTMLElement = document.createElement("p");
-    toDoEntry.innerText = item.task + " by " + item.dueDate.toDateString();
+    toDoEntry.innerText = item.task + " " + itemDate.toDateString();
+
 
     //div class="completed" and "todo" and click
     let itemDiv = document.createElement("div");
-    itemDiv.onclick = markCompleteOrNot;
+    itemDiv.onclick = markComplete;
     itemDiv.classList.add("todo");
     if(item.isComplete){
         itemDiv.classList.add("completed");
@@ -114,11 +123,20 @@ function displayToDoItems(item:ToDoItem):void{
     }
 }
 
-function markCompleteOrNot(){
+function markComplete(){
     let itemDiv = <HTMLElement>this;
+    
     this.classList.add("completed");
 
     let completedItems = fromId("complete-items");
     completedItems.appendChild(itemDiv);
+}
+
+function saveToDoItem(item:ToDoItem):void{
+    localStorage.setItem("todo entry", JSON.stringify(item))
+}
+
+function loadToDoItem():ToDoItem{
+    return JSON.parse(localStorage.getItem("todo entry"));
 }
 
