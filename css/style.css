@@ -1,6 +1,8 @@
 body{
     width:900px;
     background-color: azure;
+    margin: auto;
+    margin-top: 1em;
 }
 h1{
     margin: auto;
